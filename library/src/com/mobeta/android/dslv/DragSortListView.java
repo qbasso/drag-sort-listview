@@ -1615,6 +1615,7 @@ public class DragSortListView extends ListView {
 
 	public boolean stopDrag(boolean remove, float velocityX) {
 		if (mFloatView != null) {
+
 			mDragScroller.stopScrolling(true);
 
 			if (remove) {
@@ -2585,6 +2586,12 @@ public class DragSortListView extends ListView {
 		public void drag(int from, int to);
 	}
 
+	public interface DragStartStopListener {
+		public void dragStarted();
+
+		public void dragStopped();
+	}
+
 	/**
 	 * Your implementation of this has to reorder your ListAdapter! Make sure to
 	 * call {@link BaseAdapter#notifyDataSetChanged()} or something like it in
@@ -3144,6 +3151,14 @@ public class DragSortListView extends ListView {
 			}
 		}
 
+	}
+
+	public void setSortEnabled(boolean enabled) {
+		((DragSortController) mFloatViewManager).setSortEnabled(enabled);
+	}
+	
+	public void setRemoveEnabled(boolean enabled) {
+		((DragSortController) mFloatViewManager).setRemoveEnabled(enabled);
 	}
 
 }
